@@ -31,6 +31,51 @@ However, the remaining flip-flops should be made ready to toggle only when all l
 /* write all the steps invloved */
 
 **PROGRAM**
+------------------------------------------------------
+module Syn_Co (
+    input  wire clk,       // clock input
+    input  wire rst,       // synchronous reset
+    output reg  [2:0] q   // 3-bit counter output
+);
+
+initial begin
+     q <= 3'b000;
+	 end
+
+always @(posedge clk) 
+begin
+q <= 3'b000;
+    if (rst) 
+        q <= 3'b000;       // reset counter to 0
+    else
+        q <= q + 1;        // increment counter
+end
+
+endmodule
+
+module Co_ud (
+    input  wire clk,       // clock input
+    input  wire rst,       // synchronous reset
+	 input  wire d,
+    output reg  [2:0] q   // 3-bit counter output
+);
+
+initial begin
+     q <= 3'b0000;
+	 end
+
+always @(posedge clk) 
+begin
+q <= 3'b000;
+    if (rst) 
+        q <= 3'b000;       // reset counter to 0
+    else if(d)
+        q <= q + 1;        // increment counter
+		  else
+		  q <= q - 1;
+end
+
+endmodule
 
 /* Program for flipflops and verify its truth table in quartus using Verilog programming. 
 
@@ -38,8 +83,10 @@ Developed by: RegisterNumber:
 */
 
 **RTL LOGIC UP COUNTER**
+<img width="1533" height="820" alt="DE EXP 6 LG" src="https://github.com/user-attachments/assets/da353bd3-3b6a-4de3-955a-1ec5020e3795" />
 
 **TIMING DIAGRAM FOR IP COUNTER**
+<img width="1317" height="825" alt="DE EXP 6" src="https://github.com/user-attachments/assets/f5e7f00e-600f-45d1-a953-0f816e8436e5" />
 
 **TRUTH TABLE**
 
